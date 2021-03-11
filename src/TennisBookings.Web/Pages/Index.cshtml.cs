@@ -33,7 +33,10 @@ namespace TennisBookings.Web.Pages
                 Greeting = _greetingService.GetRandomGreeting();
             }
 
-            ShowWeatherForecast = homePageFeatures.GetValue<bool>("EnableWeatherForecast");
+            ShowWeatherForecast = homePageFeatures.GetValue<bool>("EnableWeatherForecast")
+                && _weatherForecaster.ForecastEnabled; 
+                    // this prop is hard coded in different implementations of IWeatherForecaster
+                    // and Configure configures which implementation gets injected0
 
             if (ShowWeatherForecast)
             {
