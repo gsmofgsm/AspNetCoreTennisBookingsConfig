@@ -28,6 +28,7 @@ namespace TennisBookings.Web
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
+            services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
 
             services
                 .AddAppConfiguration(Configuration)
