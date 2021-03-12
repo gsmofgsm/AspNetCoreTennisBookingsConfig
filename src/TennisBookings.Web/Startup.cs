@@ -30,7 +30,12 @@ namespace TennisBookings.Web
             //services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
             services.AddOptions<HomePageConfiguration>()
                 .Bind(Configuration.GetSection("Features:HomePage"))
-                .ValidateDataAnnotations();
+                .Validate(c =>
+                {
+                    if (c.EnableWeatherForecast && string.IsNullOrEmpty(c.ForecastSectionTitle))
+                        return false;
+                    return true;
+                }, "A section title must be provided when the homepage weather forecase is enabled.");
 
             services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
 
