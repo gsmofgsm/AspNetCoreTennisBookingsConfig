@@ -12,11 +12,12 @@ namespace TennisBookings.Web.Services
     {
         private static readonly ThreadLocal<Random> Random
             = new ThreadLocal<Random>(() => new Random());
-        private readonly GreetingConfiguration _greetingConfiguration;
+        //private readonly GreetingConfiguration _greetingConfiguration;
+        private readonly IOptionsMonitor<GreetingConfiguration> _greetingConfiguration;
 
         public GreetingService(
             IWebHostEnvironment webHostEnvironment,
-            IOptions<GreetingConfiguration> options)
+            IOptionsMonitor<GreetingConfiguration> options)
         {
             var webRootPath = webHostEnvironment.WebRootPath;
 
@@ -28,14 +29,14 @@ namespace TennisBookings.Web.Services
 
             LoginGreetings = greetingsData.LoginGreetings;
 
-            _greetingConfiguration = options.Value;
+            _greetingConfiguration = options;
         }
         
         public string[] Greetings { get; }
 
         public string[] LoginGreetings { get; }
 
-        public string GreetingColour => _greetingConfiguration.GreetingColour;
+        public string GreetingColour => _greetingConfiguration.CurrentValue.GreetingColour;
 
         public string GetRandomGreeting()
         {
