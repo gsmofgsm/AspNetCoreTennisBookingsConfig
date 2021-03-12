@@ -27,7 +27,11 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
+            //services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
+            services.AddOptions<HomePageConfiguration>()
+                .Bind(Configuration.GetSection("Features:HomePage"))
+                .ValidateDataAnnotations();
+
             services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
 
             // named options with the same Config Class
