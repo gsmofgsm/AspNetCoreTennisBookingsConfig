@@ -16,7 +16,7 @@ namespace TennisBookings.Web.External
 
         public WeatherApiClient(HttpClient httpClient, IOptionsMonitor<ExternalServicesConfig> options, ILogger<WeatherApiClient> logger)
         {
-            var externalServiceConfig = options.Get("WeatherApi");
+            var externalServiceConfig = options.Get(ExternalServicesConfig.WeatherApi);
 
             httpClient.BaseAddress = new Uri(externalServiceConfig.Url);
 

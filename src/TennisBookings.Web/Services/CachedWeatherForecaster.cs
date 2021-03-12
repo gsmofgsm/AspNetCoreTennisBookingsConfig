@@ -20,7 +20,7 @@ namespace TennisBookings.Web.Services
         {
             _weatherForecaster = weatherForecaster;
             _cache = cache;
-            _minsToCache = options.Get("WeatherApi").MinsToCache;
+            _minsToCache = options.Get(ExternalServicesConfig.WeatherApi).MinsToCache;
         }
 
         public async Task<CurrentWeatherResult> GetCurrentWeatherAsync()
