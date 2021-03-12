@@ -10,14 +10,13 @@ namespace TennisBookings.Web.Pages
     public class IndexModel : PageModel
     {
         private readonly IGreetingService _greetingService;
-        private readonly IConfiguration _configuration;
         private readonly IWeatherForecaster _weatherForecaster;
         private readonly HomePageConfiguration _homePageConfig;
 
         public IndexModel(
             IGreetingService greetingService, 
             IWeatherForecaster weatherForecaster,
-            IOptions<HomePageConfiguration> options)
+            IOptionsSnapshot<HomePageConfiguration> options) // IOptions is Singleton, whilest IOptionsSnapshot has scope lifetime
         {
             _greetingService = greetingService;
             _weatherForecaster = weatherForecaster;
