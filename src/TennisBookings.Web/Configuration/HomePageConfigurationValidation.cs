@@ -15,11 +15,11 @@ namespace TennisBookings.Web.Configuration
         private readonly IProfanityChecker _profanityChecker;
 
         public HomePageConfigurationValidation(
-            IOptions<ContentConfiguration> contentConfig,
+            IContentConfiguration contentConfig,
             IOptions<WeatherForecastingConfiguration> weatherConfig,
             IProfanityChecker profanityChecker)
         {
-            _checkForProfanity = contentConfig.Value.CheckForProfanity;
+            _checkForProfanity = contentConfig.CheckForProfanity;
             _weatherConfig = weatherConfig.Value;
             _profanityChecker = profanityChecker;
         }
