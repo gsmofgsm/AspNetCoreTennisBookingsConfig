@@ -8,6 +8,8 @@ using TennisBookings.Web.Data;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using TennisBookings.Web.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace TennisBookings.Web
 {
@@ -27,21 +29,30 @@ namespace TennisBookings.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
-            services.AddOptions<HomePageConfiguration>()
-                .Bind(Configuration.GetSection("Features:HomePage"))
-                .Validate(c =>
-                {
-                    if (c.EnableWeatherForecast && string.IsNullOrEmpty(c.ForecastSectionTitle))
-                        return false;
-                    return true;
-                }, "A section title must be provided when the homepage weather forecase is enabled.");
+            services.Configure<HomePageConfiguration>(Configuration.GetSection("Features:HomePage")); // donot forget to bind!
+            //services.AddOptions<HomePageConfiguration>()
+            //    .Bind(Configuration.GetSection("Features:HomePage"))
+            //    .Validate(c =>
+            //    {
+            //        if (c.EnableWeatherForecast && string.IsNullOrEmpty(c.ForecastSectionTitle))
+            //            return false;
+            //        return true;
+            //    }, "A section title must be provided when the homepage weather forecase is enabled.");
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<HomePageConfiguration>, HomePageConfigurationValidation>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IValidateOptions<ExternalServicesConfig>, ExternalServicesConfigurationValidation>());
+
+            services.AddHostedService<ValidateOptionsService>();
 
             services.Configure<GreetingConfiguration>(Configuration.GetSection("Features:Greeting"));
+
+            services.Configure<WeatherForecastingConfiguration>(Configuration.GetSection("Features:WeatherForecasting"));
 
             // named options with the same Config Class
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.WeatherApi, Configuration.GetSection("ExternalServices:WeatherApi"));
             services.Configure<ExternalServicesConfig>(ExternalServicesConfig.ProductsApi, Configuration.GetSection("ExternalServices:ProductsApi"));
+
+            services.Configure<ContentConfiguration>(Configuration.GetSection("Content"));
+            //services.AddSingleton<IContentC>
 
             services
                 .AddAppConfiguration(Configuration)
@@ -56,7 +67,8 @@ namespace TennisBookings.Web
                 .AddGreetings()
                 .AddCaching()
                 .AddTimeServices()
-                .AddAuditing();
+                .AddAuditing()
+                .AddContentServices();
 
             services.AddControllersWithViews();
             services.AddRazorPages(options =>
