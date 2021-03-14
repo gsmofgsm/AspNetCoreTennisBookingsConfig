@@ -19,7 +19,8 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Features__Greeting__GreetingColour": "#0000FF"
       },
       "applicationUrl": "http://localhost:55808/"
     }
