@@ -13,5 +13,6 @@ namespace TennisBookings.Web.Configuration
 
         public string Url { get; set; }
         public int MinsToCache { get; set; }
+        public string ApiKey { get; set; }
     }
 }

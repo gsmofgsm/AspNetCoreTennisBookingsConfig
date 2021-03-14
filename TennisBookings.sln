@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4EA029B4-2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisBookings.Web.Tests", "TennisBookings.Web.Tests\TennisBookings.Web.Tests.csproj", "{FF75592F-2117-4A35-AE41-F94CEF031EF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrandedProducts.Api", "BrandedProducts.Api\BrandedProducts.Api.csproj", "{75D41C4F-1834-404F-B61F-98013DED0F78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,18 @@ Global
 		{FF75592F-2117-4A35-AE41-F94CEF031EF4}.Release|x64.Build.0 = Release|Any CPU
 		{FF75592F-2117-4A35-AE41-F94CEF031EF4}.Release|x86.ActiveCfg = Release|Any CPU
 		{FF75592F-2117-4A35-AE41-F94CEF031EF4}.Release|x86.Build.0 = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|x64.Build.0 = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Debug|x86.Build.0 = Debug|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|x64.ActiveCfg = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|x64.Build.0 = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|x86.ActiveCfg = Release|Any CPU
+		{75D41C4F-1834-404F-B61F-98013DED0F78}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +81,7 @@ Global
 		{74A1EEEE-6FB1-482E-98AD-C1BC19078448} = {B5BA0B59-8D91-4F07-8090-34BDE097EFC9}
 		{8AC8E8E8-A3C2-4A10-BCA8-CD8065901DF0} = {B5BA0B59-8D91-4F07-8090-34BDE097EFC9}
 		{FF75592F-2117-4A35-AE41-F94CEF031EF4} = {4EA029B4-2F01-4968-BD1B-61AE32A63324}
+		{75D41C4F-1834-404F-B61F-98013DED0F78} = {B5BA0B59-8D91-4F07-8090-34BDE097EFC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48D28C8F-7C17-44A2-8CBC-FE82743DB063}

@@ -64,6 +64,7 @@ namespace TennisBookings.Web
                 .AddStaffServices()
                 .AddCourtServices()
                 .AddWeatherForecasting(Configuration)
+                .AddExternalProducts()
                 .AddNotifications()                
                 .AddGreetings()
                 .AddCaching()

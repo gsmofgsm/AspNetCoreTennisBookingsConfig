@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TennisBookings.Web.Configuration;
+using TennisBookings.Web.External;
+using TennisBookings.Web.External.Models;
 using TennisBookings.Web.Services;
 
 namespace TennisBookings.Web.Pages
@@ -11,15 +14,18 @@ namespace TennisBookings.Web.Pages
     {
         private readonly IGreetingService _greetingService;
         private readonly IWeatherForecaster _weatherForecaster;
+        private readonly IProductsApiClient _productsApiClient;
         private readonly HomePageConfiguration _homePageConfig;
 
         public IndexModel(
             IGreetingService greetingService, 
             IWeatherForecaster weatherForecaster,
+            IProductsApiClient productsApiClient,
             IOptionsSnapshot<HomePageConfiguration> options) // IOptions is Singleton, whilest IOptionsSnapshot has scope lifetime
         {
             _greetingService = greetingService;
             _weatherForecaster = weatherForecaster;
+            _productsApiClient = productsApiClient;
             _homePageConfig = options.Value;
 
             GreetingColour = _greetingService.GreetingColour ?? "black";
@@ -31,6 +37,7 @@ namespace TennisBookings.Web.Pages
         public string ForecastSectionTitle { get; private set; }
         public string WeatherDescription { get; private set; }
         public bool ShowWeatherForecast { get; private set; }
+        public IReadOnlyCollection<Product> Products { get; set; }
 
         public async Task OnGet()
         {
@@ -74,6 +81,9 @@ namespace TennisBookings.Web.Pages
                     }
                 }
             }
+
+            var productsResult = await _productsApiClient.GetProducts();
+            Products = productsResult.Products;
         }
     }
 }
