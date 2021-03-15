@@ -2,7 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -51,6 +55,21 @@ namespace TennisBookings.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .ConfigureAppConfiguration((ctx, builder) =>
+                {
+                    if (ctx.HostingEnvironment.IsProduction())
+                    {
+                        var config = builder.Build();
+                        var tokenProvider = new AzureServiceTokenProvider();
+
+                        var kvClient = new KeyVaultClient((authority, resource, scope) =>
+                            tokenProvider.KeyVaultTokenCallback(authority, resource, scope));
+
+                        builder.AddAzureKeyVault(config["KeyVault:BaseUrl"], kvClient,
+                            new DefaultKeyVaultSecretManager());
+                    }
+                })
+                ;
     }
 }
